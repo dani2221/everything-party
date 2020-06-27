@@ -1,0 +1,47 @@
+.card {
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    color: white;
+    background-color: rgb(37, 33, 33);
+    width: 300px;
+    padding: 2px 16px 2px 16px;
+    height: fit-content;
+    max-height: 400px;  
+    margin: 40px;
+    display: inline-block;
+    vertical-align: top;
+}
+.inlinee{
+    display: inline-block;
+}
+  .card-over{
+    overflow: auto;
+    max-height: 200px;
+  }
+
+  /* On mouse-over, add a deeper shadow */
+  .card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  }
+  /* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+  
+  /* Add some padding inside the card container */
