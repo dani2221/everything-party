@@ -18,7 +18,8 @@ class PartyPage extends Component {
             chats: [{name:'',msg:''}],
             events: [],
             urlList: []
-        }
+        },
+        events: []
     }
     latency=0
     componentDidMount(){
@@ -29,7 +30,7 @@ class PartyPage extends Component {
             const updated = {...res.data()};
             updated.nowSeconds=parseFloat(updated.nowSeconds);
             updated.prevSeconds = updated.nowSeconds;
-            this.setState({updated:updated});
+            this.setState({updated:updated,events: [...updated.events].reverse()});
             console.log(this.latency);
         })
         const unsub = db.collection('parties').doc(this.props.match.params.partyNum)
@@ -40,7 +41,7 @@ class PartyPage extends Component {
                 updated.nowSeconds=parseFloat(updated.nowSeconds);
                 updated.prevSeconds = updated.nowSeconds;
                 updated.seek = true;
-                this.setState({updated: updated})
+                this.setState({updated:updated,events: [...updated.events].reverse()});
             }else{
                 db.collection('parties').doc(this.props.match.params.partyNum).update({
                     nowSeconds: this.state.updated.nowSeconds,
@@ -49,7 +50,7 @@ class PartyPage extends Component {
                 updated.nowSeconds=this.state.updated.nowSeconds;
                 updated.prevSeconds = this.state.updated.nowSeconds;
                 updated.seek = true;
-                this.setState({updated: updated})
+                this.setState({updated:updated,events: [...updated.events].reverse()});
             }
         })
     }
@@ -84,6 +85,10 @@ class PartyPage extends Component {
         this.setState({urlText: e.target.value})
     }
     urlPost=(e)=>{
+        if(this.state.urlText.length===0){
+            this.setState({err:'Please enter a URL'})
+            return;
+        }
         if(ReactPlayer.canPlay(this.state.urlText)){
             const db = firebase.firestore();
             db.collection('parties').doc(this.props.match.params.partyNum).update({
@@ -157,7 +162,7 @@ class PartyPage extends Component {
                 <div className='card'>
                     <p style={{fontSize:'20px',fontWeight:'900'}}>Events</p>
                     <div className='card-over' style={{overflow: 'hidden',maxHeight:'300px'}}>
-                    {this.state.updated.events.reverse().map(el=>{
+                    {this.state.events.map(el=>{
                         return(
                             <div>
                                 <hr style={{border:'1px solid rgba(255,255,255,0.1)'}}/>

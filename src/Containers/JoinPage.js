@@ -39,7 +39,7 @@ class JoinPage extends Component{
         this.setState({username: event.target.value})
     }
     usernameConfirm = ()=>{
-        if(this.state.username.length===0 || this.state.username.length>10){
+        if(this.state.username.length===0 || this.state.username.length>30){
             this.setState({
                 showPopup:true
             })
@@ -76,7 +76,7 @@ class JoinPage extends Component{
                     <div>
                         {/* <Beforeunload onBeforeunload={event => this.onUnload(event)} /> */}
                         <Popup open={this.state.showPopup} onClose={()=>this.closePopup()}>
-                                <p style={{color: 'black'}}>Your username must be more than 0 and less than 11 characters</p>
+                                <p style={{color: 'black'}}>Your username must be more than 0 and less than 30 characters</p>
                         </Popup>
                         <pre className='h1'>Entering room {'\n'}{this.props.match.params.partyNum}</pre>
                         <input name='username' placeholder='Username' onChange={(event)=>this.usernameChanged(event)} className='input'/>

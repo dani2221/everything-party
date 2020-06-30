@@ -21,6 +21,10 @@ class CreateRoom extends Component{
         this.setState({urlText: event.target.value});
     }
     addUrl = ()=>{
+        if(this.state.urlText.length===0){
+            this.setState({err:'Please enter a URL'});
+            return;
+        }
         if(ReactPlayer.canPlay(this.state.urlText)){
             const upd = {...this.state};
             upd.queue.push(this.state.urlText);

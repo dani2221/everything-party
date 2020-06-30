@@ -3,28 +3,26 @@ import '../Containers/PartyPage.css'
 import Draggable from 'react-draggable';
 import '../Containers/PartyPage.css'
 class Chat extends Component{
-    // scrollToBottom = () => {
-    //     this.messagesEnd.scrollIntoView({ behavior: 'smooth'});
-    // }
-      
-    // componentDidMount() {
-    //     this.scrollToBottom();
-    // }
-      
-    // componentDidUpdate() {
-    //     this.scrollToBottom();
-    //  }
+
     render(){
     return (
     <Draggable bounds="body">
     <div className='card'>
         <p style={{fontSize:'20px',fontWeight:'900'}}>Chat</p>
     <div className='card-over' style={{display: 'flex',flexDirection: 'column-reverse'}}>
-        {this.props.chats ? this.props.chats.reverse().map(msg=>{
+        {this.props.chats.length>0 ?  [...this.props.chats].reverse().map((msg,index)=>{
             return(
                 <div>
-                    <hr style={{border:'1px solid rgba(255,255,255,0.1)'}}/>
-                    <p style={{fontWeight: '900'}}>{msg.name}</p>
+                    {index!==this.props.chats.length-1 ? ([...this.props.chats].reverse()[index+1].name!==msg.name ? 
+                    <div>
+                        <hr style={{border:'1px solid rgba(255,255,255,0.1)'}}/>
+                        <p style={{fontWeight: '900'}}>{msg.name}</p>
+                    </div>
+                    : ''):
+                    <div>
+                        <hr style={{border:'1px solid rgba(255,255,255,0.1)'}}/>
+                        <p style={{fontWeight: '900'}}>{msg.name}</p>
+                    </div>}
                     <p>{msg.msg}</p>
                 </div>
             )
